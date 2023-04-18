@@ -15,8 +15,6 @@ endfunction
 function! test#javascript#nx#build_position(type, position) abort
   let project = ''
 
-  echo 'Is filereadable(workspace.json) -->' . filereadable('workspace.json')
-
   if filereadable('workspace.json')
     let l:workspaces = readfile('workspace.json')
     if exists('*json_decode')
@@ -28,6 +26,10 @@ function! test#javascript#nx#build_position(type, position) abort
         endif
       endfor
     endif
+  endif
+
+  if !project
+    let project = 'api'
   endif
 
   echo 'Project variable is set to: ' . project
