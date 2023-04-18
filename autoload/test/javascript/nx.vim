@@ -14,6 +14,9 @@ endfunction
 
 function! test#javascript#nx#build_position(type, position) abort
   let project = ''
+
+  echo 'Is filereadable(workspace.json) -->' . filereadable('workspace.json')
+
   if filereadable('workspace.json')
     let l:workspaces = readfile('workspace.json')
     if exists('*json_decode')
