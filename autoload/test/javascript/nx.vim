@@ -27,6 +27,8 @@ function! test#javascript#nx#build_position(type, position) abort
     endif
   endif
 
+  echo 'Project variable is set to: ' . project
+
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
