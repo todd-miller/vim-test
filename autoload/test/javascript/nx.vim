@@ -19,7 +19,7 @@ function! test#javascript#nx#build_position(type, position) abort
     if exists('*json_decode')
       let l:projects = json_decode(join(workspaces, ''))['projects']
       for [key, value] in items(projects)
-        if stridx(a:position['file'], value['root'] >= 0)
+        if stridx(a:position['file'], value) >= 0
           let project = key
           break
         endif
@@ -32,11 +32,11 @@ function! test#javascript#nx#build_position(type, position) abort
     if !empty(name)
       let name = '-t '.shellescape(name, 1)
     endif
-    return [project, name, '--test-file', a:position['file'], '--no-coverage']
+    return [project, name, '--test-file', a:position['file']]
   elseif a:type ==# 'file'
-    return [project, '--test-file', a:position['file'], '--no-coverage']
+    return [project, '--test-file', a:position['file']]
   else
-    return [project, '--no-coverage']
+    return [project]
   endif
 endfunction
 
